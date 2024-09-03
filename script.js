@@ -1,27 +1,27 @@
-document.addEventListener("DOMContentLoaded", function() {
-    preencherObjetosConhecimento();
-});
+// Função para preencher o select com os objetos do conhecimento
+async function preencherObjetosConhecimento() {
+    const select = document.getElementById('objetoConhecimento');
+    const response = await fetch('data.json');
+    const apiData = await response.json();
 
-function preencherObjetosConhecimento() {
-    fetch('data.json')
-        .then(response => response.json())
-        .then(data => {
-            const select = document.getElementById('objetoConhecimento');
-            for (let objeto in data) {
-                let option = document.createElement('option');
-                option.value = objeto;
-                option.textContent = objeto;
-                select.appendChild(option);
-            }
-            window.apiData = data; // Armazena os dados para uso posterior
-        })
-        .catch(error => console.error('Erro ao carregar os dados:', error));
+    for (let objeto in apiData) {
+        let option = document.createElement('option');
+        option.value = objeto;
+        option.textContent = objeto;
+        select.appendChild(option);
+    }
 }
 
-function autoCompletarCampos() {
+// Função para autocompletar os campos
+async function autoCompletarCampos() {
     const objetoSelecionado = document.getElementById('objetoConhecimento').value;
-    if (objetoSelecionado && window.apiData[objetoSelecionado]) {
-        const dados = window.apiData[objetoSelecionado];
+    if (!objetoSelecionado) return;
+
+    const response = await fetch('data.json');
+    const apiData = await response.json();
+
+    if (apiData[objetoSelecionado]) {
+        const dados = apiData[objetoSelecionado];
         document.getElementById('competenciaGeral').value = dados.competenciaGeral;
         document.getElementById('competenciaEspecifica').value = dados.competenciaEspecifica;
         document.getElementById('habilidadeEspecifica').value = dados.habilidadeEspecifica;
@@ -30,10 +30,13 @@ function autoCompletarCampos() {
     }
 }
 
+// Chamada para preencher os objetos do conhecimento quando a página carregar
+window.onload = preencherObjetosConhecimento;
+
 function gerarPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF('p', 'mm', 'a4');
-
+    
     // Definir margens conforme ABNT
     const marginLeft = 30;  // 3 cm
     const marginRight = 20; // 2 cm
@@ -46,16 +49,18 @@ function gerarPDF() {
 
     let yPos = marginTop;
 
+    // Função para adicionar texto justificado
     function addJustifiedText(text, y) {
         const splitText = doc.splitTextToSize(text, textWidth);
         const numberOfLines = splitText.length;
         const maxY = pageHeight - marginBottom;
-
+        
+        // Verifica se há espaço suficiente na página atual, senão adiciona nova página
         if (y + numberOfLines * lineHeight > maxY) {
             doc.addPage();
             y = marginTop;
         }
-
+        
         for (let i = 0; i < splitText.length; i++) {
             if (y + lineHeight > maxY) {
                 doc.addPage();
@@ -67,61 +72,68 @@ function gerarPDF() {
         return y;
     }
 
+    // Cabeçalho e informações do professor/turma
     doc.setFont('Times', 'bold');
     doc.setFontSize(12);
     yPos = addJustifiedText("GOVERNO DO ESTADO DO PIAUÍ\nSECRETARIA DE EDUCAÇÃO E CULTURA - SEDUC", yPos);
     yPos = addJustifiedText(`${document.getElementById('gerencia').value}ª GERÊNCIA REGIONAL DE EDUCAÇÃO`, yPos);
     yPos = addJustifiedText(document.getElementById('escola').value, yPos);
     yPos = addJustifiedText(document.getElementById('endereco').value, yPos);
-    yPos += lineHeight;
-
+    yPos += lineHeight; // Espaço extra após o cabeçalho
+    
     doc.setFont('Times', 'normal');
-    yPos = addJustifiedText(`PROFESSOR(A): ${document.getElementById('professor').value}`, yPos);
-    yPos = addJustifiedText(`TURMAS: ${document.getElementById('turmas').value}`, yPos);
-    yPos = addJustifiedText(`ÁREA DO CONHECIMENTO: ${document.getElementById('areaConhecimento').value}`, yPos);
-    yPos = addJustifiedText(`COMPONENTE CURRICULAR: ${document.getElementById('componenteCurricular').value}`, yPos);
-    yPos = addJustifiedText(`PERÍODO: ${document.getElementById('periodo').value}`, yPos);
-    yPos += lineHeight;
+    yPos = addJustifiedText(`Professor(a): ${document.getElementById('professor').value}`, yPos);
+    yPos = addJustifiedText(`Turmas: ${document.getElementById('turmas').value}`, yPos);
+    yPos = addJustifiedText(`Área do Conhecimento: ${document.getElementById('areaConhecimento').value}`, yPos);
+    yPos = addJustifiedText(`Componente Curricular: ${document.getElementById('componenteCurricular').value}`, yPos);
+    yPos = addJustifiedText(`Período: ${document.getElementById('periodo').value}`, yPos);
+    yPos += lineHeight; // Espaço extra após informações iniciais
+    
+    // Conteúdos principais
+    const campos = [
+        { label: 'Objeto do Conhecimento', value: 'objetoConhecimento' },
+        { label: 'Competência Geral', value: 'competenciaGeral' },
+        { label: 'Competência Específica da Área', value: 'competenciaEspecifica' },
+        { label: 'Habilidade Específica', value: 'habilidadeEspecifica' },
+        { label: 'Integração entre as Áreas e/ou Componentes', value: 'integracao' },
+        { label: 'Objetivos de Aprendizagem', value: 'objetivos' },
+        { label: 'Metodologia', value: 'metodologia' },
+        { label: 'Material de Apoio', value: 'materialApoio' },
+        { label: 'Estratégia de Avaliação', value: 'estrategiaAvaliacao' }
+    ];
 
-    doc.setFont('Times', 'bold');
-    doc.text('PLANO DE AULA', pageWidth / 2, yPos, { align: 'center' });
-    yPos += lineHeight;
+    campos.forEach(campo => {
+        doc.setFont('Times', 'bold');
+        yPos = addJustifiedText(campo.label, yPos);
+        doc.setFont('Times', 'normal');
+        yPos = addJustifiedText(document.getElementById(campo.value).value, yPos);
+        yPos += lineHeight; // Espaço extra entre seções
+    });
+// Assinaturas
+yPos += lineHeight; // Espaço extra antes das assinaturas
 
-    doc.setFont('Times', 'normal');
-    yPos = addJustifiedText(`OBJETO DO CONHECIMENTO: ${document.getElementById('objetoConhecimento').value}`, yPos);
-    yPos += lineHeight / 2;
+// Verifica se há espaço suficiente para as assinaturas, senão adiciona nova página
+if (yPos + lineHeight * 2 > pageHeight - marginBottom) {
+    doc.addPage();
+    yPos = marginTop;
+}
 
-    yPos = addJustifiedText('Competência Geral:', yPos);
-    yPos = addJustifiedText(document.getElementById('competenciaGeral').value, yPos);
-    yPos += lineHeight / 2;
+// Assinaturas: Professor(a), Diretor(a), Coordenador(a)
+// Cada linha tem 40 mm de comprimento, espaçadas 10 mm entre si
+doc.setFont('Times', 'normal');
 
-    yPos = addJustifiedText('Competência Específica da Área:', yPos);
-    yPos = addJustifiedText(document.getElementById('competenciaEspecifica').value, yPos);
-    yPos += lineHeight / 2;
+// Linha para PROFESSOR(A)
+doc.line(marginLeft, yPos, marginLeft + 40, yPos);
+doc.text('PROFESSOR(A)', marginLeft + 20, yPos + 5, { align: 'center' });
 
-    yPos = addJustifiedText('Habilidade Específica:', yPos);
-    yPos = addJustifiedText(document.getElementById('habilidadeEspecifica').value, yPos);
-    yPos += lineHeight / 2;
+// Linha para DIRETOR(A)
+doc.line(marginLeft + 50, yPos, marginLeft + 90, yPos);
+doc.text('DIRETOR(A)', marginLeft + 70, yPos + 5, { align: 'center' });
 
-    yPos = addJustifiedText('Integração entre as áreas e/ou componentes:', yPos);
-    yPos = addJustifiedText(document.getElementById('integracao').value, yPos);
-    yPos += lineHeight / 2;
+// Linha para COORDENADOR(A)
+doc.line(marginLeft + 100, yPos, marginLeft + 140, yPos);
+doc.text('COORDENADOR(A)', marginLeft + 120, yPos + 5, { align: 'center' });
 
-    yPos = addJustifiedText('Objetivos de aprendizagem:', yPos);
-    yPos = addJustifiedText(document.getElementById('objetivos').value, yPos);
-    yPos += lineHeight / 2;
-
-    yPos = addJustifiedText('Metodologia:', yPos);
-    yPos = addJustifiedText(document.getElementById('metodologia').value, yPos);
-    yPos += lineHeight / 2;
-
-    yPos = addJustifiedText('Material de apoio:', yPos);
-    yPos = addJustifiedText(document.getElementById('materialApoio').value, yPos);
-    yPos += lineHeight / 2;
-
-    yPos = addJustifiedText('Estratégia de Avaliação:', yPos);
-    yPos = addJustifiedText(document.getElementById('estrategiaAvaliacao').value, yPos);
-    yPos += lineHeight / 2;
-
-    doc.save('plano_de_aula.pdf');
+// Salvar o PDF
+doc.save('plano_de_aula.pdf');
 }
