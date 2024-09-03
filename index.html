@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano de Aula - Gerador</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script defer src="assets/js/script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Gerador de Plano de Aula</h1>
+        <form id="planoAulaForm">
+            <label for="gerencia">Número da Gerência Regional de Educação:</label>
+            <input type="number" id="gerencia" required min="1" max="99">
+            
+            <label for="escola">Escola:</label>
+            <input type="text" id="escola" required>
+            
+            <label for="endereco">Endereço da Escola:</label>
+            <input type="text" id="endereco" required>
+            
+            <label for="professor">Professor(a):</label>
+            <input type="text" id="professor" required>
+            
+            <label for="turmas">Turmas:</label>
+            <input type="text" id="turmas" required>
+            
+            <label for="areaConhecimento">Área do Conhecimento:</label>
+            <input type="text" id="areaConhecimento" required>
+            
+            <label for="componenteCurricular">Componente Curricular:</label>
+            <input type="text" id="componenteCurricular" required>
+            
+            <label for="periodo">Período:</label>
+            <input type="text" id="periodo" required>
+            
+            <label for="objetoConhecimento">Objeto do Conhecimento:</label>
+            <select id="objetoConhecimento" onchange="autoCompletarCampos()">
+                <option value="">Selecione um objeto do conhecimento</option>
+                <!-- Opções serão preenchidas dinamicamente -->
+            </select>
+            
+            <label for="competenciaGeral">Competência Geral:</label>
+            <textarea id="competenciaGeral" required readonly></textarea>
+            
+            <label for="competenciaEspecifica">Competência Específica da Área:</label>
+            <textarea id="competenciaEspecifica" required readonly></textarea>
+            
+            <label for="habilidadeEspecifica">Habilidade Específica:</label>
+            <textarea id="habilidadeEspecifica" required readonly></textarea>
+            
+            <label for="integracao">Integração entre as áreas e/ou componentes:</label>
+            <textarea id="integracao" required readonly></textarea>
+            
+            <label for="objetivos">Objetivos de aprendizagem:</label>
+            <textarea id="objetivos" required readonly></textarea>
+            
+            <label for="metodologia">Metodologia:</label>
+            <textarea id="metodologia" required></textarea>
+            
+            <label for="materialApoio">Material de apoio:</label>
+            <textarea id="materialApoio" required></textarea>
+            
+            <label for="estrategiaAvaliacao">Estratégia de Avaliação:</label>
+            <textarea id="estrategiaAvaliacao" required></textarea>
+            
+            <button type="button" onclick="gerarPDF()">Exportar para PDF</button>
+        </form>
+    </div>
+</body>
+</html>

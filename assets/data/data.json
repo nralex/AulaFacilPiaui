@@ -1,0 +1,16 @@
+{
+    "Objeto 1": {
+        "competenciaGeral": "Competência geral relacionada ao Objeto 1.",
+        "competenciaEspecifica": "Competência específica da área para o Objeto 1.",
+        "habilidadeEspecifica": "Habilidade específica para o Objeto 1.",
+        "integracao": "Integração entre áreas/componente para o Objeto 1.",
+        "objetivos": "Objetivos de aprendizagem relacionados ao Objeto 1."
+    },
+    "Objeto 2": {
+        "competenciaGeral": "Competência geral relacionada ao Objeto 2.",
+        "competenciaEspecifica": "Competência específica da área para o Objeto 2.",
+        "habilidadeEspecifica": "Habilidade específica para o Objeto 2.",
+        "integracao": "Integração entre áreas/componente para o Objeto 2.",
+        "objetivos": "Objetivos de aprendizagem relacionados ao Objeto 2."
+    }
+}
