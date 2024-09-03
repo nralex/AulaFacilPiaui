@@ -1,16 +1,86 @@
 {
-    "Objeto 1": {
-        "competenciaGeral": "Competência geral relacionada ao Objeto 1.",
-        "competenciaEspecifica": "Competência específica da área para o Objeto 1.",
-        "habilidadeEspecifica": "Habilidade específica para o Objeto 1.",
-        "integracao": "Integração entre áreas/componente para o Objeto 1.",
-        "objetivos": "Objetivos de aprendizagem relacionados ao Objeto 1."
+    "Estrutura atômica e modelos atômicos": {
+        "competenciaGeral": "Compreender a estrutura atômica e sua evolução histórica por meio dos diferentes modelos atômicos, aplicando-os na interpretação de fenômenos químicos.",
+        "competenciaEspecifica": "Identificar e descrever os principais modelos atômicos e suas contribuições para a evolução do conceito de átomo.",
+        "habilidadeEspecifica": "Reconhecer e explicar a evolução dos modelos atômicos com base em evidências experimentais.",
+        "integracao": "Integração com História e Física ao abordar a evolução do conceito de átomo ao longo do tempo.",
+        "objetivos": "Desenvolver a habilidade de interpretar os diferentes modelos atômicos e relacioná-los com fenômenos observáveis."
     },
-    "Objeto 2": {
-        "competenciaGeral": "Competência geral relacionada ao Objeto 2.",
-        "competenciaEspecifica": "Competência específica da área para o Objeto 2.",
-        "habilidadeEspecifica": "Habilidade específica para o Objeto 2.",
-        "integracao": "Integração entre áreas/componente para o Objeto 2.",
-        "objetivos": "Objetivos de aprendizagem relacionados ao Objeto 2."
+    "Tabela Periódica e propriedades periódicas": {
+        "competenciaGeral": "Compreender a organização da Tabela Periódica e as propriedades periódicas dos elementos, aplicando esses conhecimentos na resolução de problemas químicos.",
+        "competenciaEspecifica": "Identificar as propriedades periódicas e suas variações na Tabela Periódica, explicando as tendências observadas.",
+        "habilidadeEspecifica": "Relacionar a posição dos elementos na Tabela Periódica com suas propriedades físicas e químicas.",
+        "integracao": "Integração com Matemática ao abordar o conceito de periodicidade e variações numéricas na Tabela Periódica.",
+        "objetivos": "Capacitar o aluno a utilizar a Tabela Periódica como ferramenta para prever e explicar propriedades dos elementos."
+    },
+    "Ligações químicas e forças intermoleculares": {
+        "competenciaGeral": "Compreender as ligações químicas e as forças intermoleculares, aplicando esses conceitos para interpretar propriedades físicas das substâncias.",
+        "competenciaEspecifica": "Descrever os diferentes tipos de ligações químicas e suas implicações nas propriedades das substâncias.",
+        "habilidadeEspecifica": "Identificar e comparar as forças intermoleculares e suas influências nas propriedades das substâncias.",
+        "integracao": "Integração com Física ao abordar forças intermoleculares e suas relações com a energia e a temperatura.",
+        "objetivos": "Desenvolver a habilidade de correlacionar o tipo de ligação química com as propriedades observadas nas substâncias."
+    },
+    "Reações químicas e estequiometria": {
+        "competenciaGeral": "Compreender e aplicar conceitos de reações químicas e estequiometria na resolução de problemas e na interpretação de fenômenos químicos.",
+        "competenciaEspecifica": "Analisar e balancear equações químicas, aplicando conceitos estequiométricos em cálculos químicos.",
+        "habilidadeEspecifica": "Realizar cálculos estequiométricos envolvendo reagentes e produtos em reações químicas.",
+        "integracao": "Integração com Matemática ao abordar cálculos envolvendo proporções e quantidades de substâncias.",
+        "objetivos": "Capacitar o aluno a resolver problemas envolvendo reações químicas, com foco na aplicação da estequiometria."
+    },
+    "Equilíbrios químicos": {
+        "competenciaGeral": "Compreender o conceito de equilíbrio químico e sua aplicação na interpretação de processos reversíveis e irreversíveis.",
+        "competenciaEspecifica": "Descrever as condições para o estabelecimento do equilíbrio químico e interpretar gráficos de equilíbrio.",
+        "habilidadeEspecifica": "Aplicar o princípio de Le Chatelier para prever o comportamento de sistemas em equilíbrio diante de perturbações.",
+        "integracao": "Integração com Física ao abordar sistemas dinâmicos e conceitos de energia e entropia.",
+        "objetivos": "Capacitar o aluno a analisar e prever mudanças em sistemas em equilíbrio químico."
+    },
+    "Ácidos e bases": {
+        "competenciaGeral": "Compreender o conceito de ácidos e bases, suas propriedades e comportamentos em soluções aquosas.",
+        "competenciaEspecifica": "Diferenciar ácidos e bases fortes e fracos, e entender a escala de pH como medida da acidez e basicidade.",
+        "habilidadeEspecifica": "Realizar cálculos envolvendo pH, pOH e concentração de íons em soluções ácidas e básicas.",
+        "integracao": "Integração com Biologia ao abordar a importância do pH em sistemas biológicos.",
+        "objetivos": "Desenvolver a capacidade de identificar ácidos e bases no cotidiano e compreender seus efeitos em diferentes contextos."
+    },
+    "Oxidação e redução (Redox)": {
+        "competenciaGeral": "Compreender os processos de oxidação e redução, aplicando esses conceitos em reações químicas e no entendimento de processos eletroquímicos.",
+        "competenciaEspecifica": "Identificar os agentes oxidantes e redutores em reações redox, e compreender o conceito de número de oxidação.",
+        "habilidadeEspecifica": "Balancear reações de oxidação-redução e calcular o potencial padrão de eletrodo.",
+        "integracao": "Integração com Física ao abordar conceitos de eletricidade e energia em processos eletroquímicos.",
+        "objetivos": "Capacitar o aluno a aplicar conceitos de oxidação e redução na análise de reações químicas e processos eletroquímicos."
+    },
+    "Soluções e suas concentrações": {
+        "competenciaGeral": "Compreender as propriedades das soluções e os diferentes métodos de expressar a concentração de solutos.",
+        "competenciaEspecifica": "Diferenciar tipos de soluções e realizar cálculos envolvendo concentração em unidades como molaridade, molalidade e fração molar.",
+        "habilidadeEspecifica": "Preparar soluções com concentrações específicas e resolver problemas práticos envolvendo diluição e mistura de soluções.",
+        "integracao": "Integração com Biologia e Física ao abordar a importância das soluções em processos biológicos e físicos.",
+        "objetivos": "Desenvolver a habilidade de preparar e manipular soluções, aplicando conceitos de concentração e solubilidade."
+    },
+    "Propriedades coligativas": {
+        "competenciaGeral": "Compreender as propriedades coligativas das soluções e sua aplicação na interpretação de fenômenos químicos.",
+        "competenciaEspecifica": "Descrever e diferenciar as propriedades coligativas como pressão de vapor, ebulição, congelamento e osmose.",
+        "habilidadeEspecifica": "Aplicar conceitos de propriedades coligativas em problemas envolvendo variação de ponto de ebulição e congelamento.",
+        "integracao": "Integração com Biologia ao abordar processos osmóticos e sua importância em sistemas vivos.",
+        "objetivos": "Capacitar o aluno a analisar o efeito das propriedades coligativas em diferentes soluções e contextos práticos."
+    },
+    "Termoquímica": {
+        "competenciaGeral": "Compreender os princípios da termoquímica, aplicando-os na análise de processos que envolvem troca de energia.",
+        "competenciaEspecifica": "Diferenciar processos exotérmicos e endotérmicos, e calcular a variação de entalpia em reações químicas.",
+        "habilidadeEspecifica": "Realizar cálculos termoquímicos e interpretar diagramas de energia.",
+        "integracao": "Integração com Física ao abordar conceitos de energia, trabalho e calor em sistemas químicos.",
+        "objetivos": "Desenvolver a habilidade de aplicar conceitos de termoquímica na análise e interpretação de reações químicas."
+    },
+    "Cinética química": {
+        "competenciaGeral": "Compreender os fatores que afetam a velocidade das reações químicas e aplicá-los na interpretação de processos cinéticos.",
+        "competenciaEspecifica": "Identificar os fatores que influenciam a velocidade das reações, como temperatura, concentração e catalisadores.",
+        "habilidadeEspecifica": "Realizar cálculos de velocidade de reação e interpretar gráficos cinéticos.",
+        "integracao": "Integração com Física ao abordar a influência da temperatura e energia cinética nas reações químicas.",
+        "objetivos": "Capacitar o aluno a analisar e prever a velocidade das reações químicas em diferentes condições."
+    },
+    "Eletroquímica e pilhas": {
+        "competenciaGeral": "Compreender os princípios da eletroquímica, aplicando-os na análise e interpretação de processos de oxirredução em pilhas e baterias.",
+        "competenciaEspecifica": "Descrever o funcionamento de pilhas e baterias, e calcular o potencial padrão de eletrodo.",
+        "habilidadeEspecifica": "Balancear reações redox e resolver problemas envolvendo eletroquímica e eletrólise.",
+        "integracao": "Integração com Física ao abordar conceitos de eletricidade e transferência de elétrons em processos eletroquímicos.",
+        "objetivos": "Desenvolver a habilidade de aplicar conceitos de eletroquímica na análise e funcionamento de dispositivos elétricos."
     }
 }
