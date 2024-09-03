@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function preencherObjetosConhecimento() {
-    fetch('assets/data/data.json')
+    fetch('data.json')
         .then(response => response.json())
         .then(data => {
             const select = document.getElementById('objetoConhecimento');
