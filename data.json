@@ -1,6 +1,11 @@
 {
     "Estrutura atômica e modelos atômicos": {
-        "competenciaGeral": "Compreender a estrutura atômica e sua evolução histórica por meio dos diferentes modelos atômicos, aplicando-os na interpretação de fenômenos químicos.",
+        "areaConhecimento": "Ciências da Natureza",
+        "componenteCurricular": "Química",
+        "serie": "1ª Série",
+        "competenciaGeral": "Compreender",
+        "Área do Conhecimento":"Ciências da Natureza",
+        "Componente Curricular":" a estrutura atômica e sua evolução histórica por meio dos diferentes modelos atômicos, aplicando-os na interpretação de fenômenos químicos.",
         "competenciaEspecifica": "Identificar e descrever os principais modelos atômicos e suas contribuições para a evolução do conceito de átomo.",
         "habilidadeEspecifica": "Reconhecer e explicar a evolução dos modelos atômicos com base em evidências experimentais.",
         "integracao": "Integração com História e Física ao abordar a evolução do conceito de átomo ao longo do tempo.",
