@@ -44,7 +44,6 @@ function generatePDF() {
     yPos = addJustifiedText("GOVERNO DO ESTADO DO PIAUÍ\nSECRETARIA DE EDUCAÇÃO E CULTURA - SEDUC", yPos);
     yPos = addJustifiedText(`${document.getElementById('gerencia').value}ª GERÊNCIA REGIONAL DE EDUCAÇÃO`, yPos);
     yPos = addJustifiedText(document.getElementById('escola').value, yPos);
-    yPos = addJustifiedText(document.getElementById('endereco').value, yPos);
     yPos += lineHeight; // Espaço extra após o cabeçalho
 
     doc.setFont('Times', 'normal');
