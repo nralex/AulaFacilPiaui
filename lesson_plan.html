@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Plano de Aula</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+</head>
+<body>
+    <header>
+        <img src="assets/logo_seduc.svg" alt="Logo SEDUC">
+        <h1>Criar Plano de Aula</h1>
+    </header>
+    <main>
+        <form id="planoDeAulaForm">
+            <input id="gerencia" type="text" placeholder="Gerência" /> Gerência 
+            <input id="escola" type="text" placeholder="Escola" />
+            <input id="endereco" type="text" placeholder="Endereço" />
+            <input id="professor" type="text" placeholder="Professor" />
+            <input id="turmas" type="text" placeholder="Turmas" />
+            
+            <select id="areaConhecimento" onchange="preencherComponentesCurriculares()">
+                <option value="">Selecione a Área do Conhecimento</option>
+            </select>
+            
+            <select id="componenteCurricular" onchange="preencherSeries()">
+                <option value="">Selecione o Componente Curricular</option>
+            </select>
+            
+            <select id="serie" onchange="preencherObjetosConhecimento()">
+                <option value="">Selecione a Série</option>
+            </select>
+            
+            <select id="objetoConhecimento" onchange="autoCompletarCampos()" multiple>
+                <option value="">Selecione o Objeto do Conhecimento</option>
+            </select>
+            
+            <!-- Campos que serão preenchidos automaticamente -->
+            <textarea id="competenciaEspecifica"></textarea>
+            <textarea id="habilidadeEspecifica"></textarea>
+            <textarea id="objetivos"></textarea>
+            
+            <!-- Campos para preenchimento manual -->
+            <textarea id="metodologia" placeholder="Metodologia"></textarea>
+            <textarea id="materialApoio" placeholder="Material de Apoio"></textarea>
+            <textarea id="estrategiaAvaliacao" placeholder="Estrategia de Avaliação"></textarea>
+            
+            <button type="button" onclick="generatePDF()">Gerar PDF</button>
+        </form>
+        
+    </main>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/pdf.js"></script>
+</body>
+</html>
