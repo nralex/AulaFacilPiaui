@@ -77,7 +77,7 @@ function autoCompletarCampos() {
 }
 
 function salvarPlanoDeAula(event) {
-    event.preventDefault();
+    event.preventDefault(); // Previne o comportamento padrão do formulário
 
     const planoDeAula = {
         gre: document.getElementById('gre').value,
@@ -95,12 +95,11 @@ function salvarPlanoDeAula(event) {
         estrategiaDeAvaliacao: document.getElementById('estrategiaDeAvaliacao').value,
     };
 
-    // Armazena o plano de aula no localStorage
+    // Salvar no localStorage
     localStorage.setItem('planoDeAula', JSON.stringify(planoDeAula));
     alert('Plano de aula salvo com sucesso!');
 
-    // Redireciona para a página de exportação do PDF
-    window.location.assign("export_pdf.html");
+    // Redirecionar para export_pdf.html
+    window.location.href = "export_pdf.html";
 }
-
 
