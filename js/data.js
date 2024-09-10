@@ -1,5 +1,4 @@
 let apiData = {};
-
 fetch('data/data.json')
     .then(response => response.json())
     .then(data => {
@@ -76,14 +75,13 @@ function autoCompletarCampos() {
     const selectArea = document.getElementById('areaConhecimento').value;
     const selectComponente = document.getElementById('componenteCurricular').value;
     const selectSerie = document.getElementById('serie').value;
-    const selectObjetos = document.getElementById('objetoConhecimento');
-    const objetosSelecionados = Array.from(selectObjetos.selectedOptions).map(option => option.value);
+    const selectedOptions = Array.from(document.getElementById('objetoConhecimento').selectedOptions);
+    let competencias = '';
+    let habilidades = '';
+    let objetivos = '';
 
-    let competencias = [];
-    let habilidades = [];
-    let objetivos = [];
-
-    objetosSelecionados.forEach(objetoSelecionado => {
+    selectedOptions.forEach(option => {
+        const objetoSelecionado = option.value;
         const dados = apiData[selectArea].find(item =>
             item["Componente Curricular"] === selectComponente &&
             item["Série"] === selectSerie &&
@@ -91,15 +89,14 @@ function autoCompletarCampos() {
         );
 
         if (dados) {
-            competencias.push(dados["COMPETÊNCIA ESPECÍFICA"]);
-            habilidades.push(dados["HABILIDADE"]);
-            objetivos.push(dados["OBJETIVO DE APRENDIZAGEM"]);
+            competencias += dados["COMPETÊNCIA ESPECÍFICA"] + '\n';
+            habilidades += dados["HABILIDADE"] + '\n';
+            objetivos += dados["OBJETIVO DE APRENDIZAGEM"] + '\n';
         }
     });
 
-    // Atualiza os campos com valores concatenados
-    document.getElementById('competenciaEspecifica').value = competencias.join('; ');
-    document.getElementById('habilidadeEspecifica').value = habilidades.join('; ');
-    document.getElementById('objetivos').value = objetivos.join('; ');
+    document.getElementById('competenciaEspecifica').value = competencias.trim();
+    document.getElementById('habilidadeEspecifica').value = habilidades.trim();
+    document.getElementById('objetivos').value = objetivos.trim();
 }
 

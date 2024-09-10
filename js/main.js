@@ -1,86 +1,106 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const areaSelect = document.getElementById('area');
-    const componenteSelect = document.getElementById('componente');
-    const serieSelect = document.getElementById('serie');
-    const objetosContainer = document.getElementById('objetos');
+function preencherComponentesCurriculares() {
+    const selectArea = document.getElementById('areaConhecimento').value;
+    const selectComponente = document.getElementById('componenteCurricular');
+    selectComponente.innerHTML = '<option value="">Selecione o Componente</option>'; // Resetar opções
 
-    // Preencher Área do Conhecimento
-    Object.keys(data).forEach(area => {
-        const option = document.createElement('option');
-        option.value = area;
-        option.textContent = area;
-        areaSelect.appendChild(option);
-    });
+    if (apiData[selectArea]) {
+        const componentes = apiData[selectArea];
+        let componentesUnicos = [...new Set(componentes.map(item => item["Componente Curricular"]))];
 
-    areaSelect.addEventListener('change', function () {
-        componenteSelect.innerHTML = '';  // Limpa as opções anteriores
-        serieSelect.innerHTML = '';       // Limpa as opções anteriores
-        objetosContainer.innerHTML = '';  // Limpa os objetos anteriores
+        componentesUnicos.forEach(componente => {
+            let option = document.createElement('option');
+            option.value = componente;
+            option.textContent = componente;
+            selectComponente.appendChild(option);
+        });
+    }
+}
 
-        const selectedArea = areaSelect.value;
+function preencherSeries() {
+    const selectArea = document.getElementById('areaConhecimento').value;
+    const selectComponente = document.getElementById('componenteCurricular').value;
+    const selectSerie = document.getElementById('serie');
+    selectSerie.innerHTML = '<option value="">Selecione a Série</option>'; // Resetar opções
 
-        if (selectedArea) {
-            const componentes = data[selectedArea];
+    if (apiData[selectArea]) {
+        const series = apiData[selectArea].filter(item => item["Componente Curricular"] === selectComponente);
+        let seriesUnicas = [...new Set(series.map(item => item["Série"]))];
 
-            const componentesCurriculares = [...new Set(componentes.map(item => item["Componente Curricular"]))];
-            componentesCurriculares.forEach(componente => {
-                const option = document.createElement('option');
-                option.value = componente;
-                option.textContent = componente;
-                componenteSelect.appendChild(option);
-            });
+        seriesUnicas.forEach(serie => {
+            let option = document.createElement('option');
+            option.value = serie;
+            option.textContent = serie;
+            selectSerie.appendChild(option);
+        });
+    }
+}
 
-            componenteSelect.disabled = false;
-        }
-    });
+function preencherObjetosConhecimento() {
+    const selectArea = document.getElementById('areaConhecimento').value;
+    const selectComponente = document.getElementById('componenteCurricular').value;
+    const selectSerie = document.getElementById('serie').value;
+    const selectObjetos = document.getElementById('objetoConhecimento');
+    selectObjetos.innerHTML = ''; // Limpar opções anteriores
 
-    componenteSelect.addEventListener('change', function () {
-        serieSelect.innerHTML = '';       // Limpa as opções anteriores
-        objetosContainer.innerHTML = '';  // Limpa os objetos anteriores
+    if (apiData[selectArea]) {
+        const objetos = apiData[selectArea].filter(item =>
+            item["Componente Curricular"] === selectComponente &&
+            item["Série"] === selectSerie
+        );
 
-        const selectedArea = areaSelect.value;
-        const selectedComponente = componenteSelect.value;
+        objetos.forEach(objeto => {
+            let option = document.createElement('option');
+            option.value = objeto["OBJETOS DO CONHECIMENTO"];
+            option.textContent = objeto["OBJETOS DO CONHECIMENTO"];
+            selectObjetos.appendChild(option);
+        });
+    }
+}
 
-        if (selectedComponente) {
-            const series = data[selectedArea].filter(item => item["Componente Curricular"] === selectedComponente);
-            const seriesUnicas = [...new Set(series.map(item => item["Série"]))];
+function autoCompletarCampos() {
+    const selectArea = document.getElementById('areaConhecimento').value;
+    const selectComponente = document.getElementById('componenteCurricular').value;
+    const selectSerie = document.getElementById('serie').value;
+    const objetoSelecionado = document.getElementById('objetoConhecimento').value;
 
-            seriesUnicas.forEach(serie => {
-                const option = document.createElement('option');
-                option.value = serie;
-                option.textContent = serie;
-                serieSelect.appendChild(option);
-            });
+    const dados = apiData[selectArea].find(item =>
+        item["Componente Curricular"] === selectComponente &&
+        item["Série"] === selectSerie &&
+        item["OBJETOS DO CONHECIMENTO"] === objetoSelecionado
+    );
 
-            serieSelect.disabled = false;
-        }
-    });
+    if (dados) {
+        document.getElementById('competenciaEspecifica').value = dados["COMPETÊNCIA ESPECÍFICA"];
+        document.getElementById('habilidadeEspecifica').value = dados["HABILIDADE"];
+        document.getElementById('objetivos').value = dados["OBJETIVO DE APRENDIZAGEM"];
+    }
+}
 
-    serieSelect.addEventListener('change', function () {
-        objetosContainer.innerHTML = '';  // Limpa os objetos anteriores
+function salvarPlanoDeAula(event) {
+    event.preventDefault();
 
-        const selectedArea = areaSelect.value;
-        const selectedComponente = componenteSelect.value;
-        const selectedSerie = serieSelect.value;
+    const planoDeAula = {
+        gre: document.getElementById('gre').value,
+        escola: document.getElementById('escola').value,
+        professor: document.getElementById('professor').value,
+        areaConhecimento: document.getElementById('areaConhecimento').value,
+        componenteCurricular: document.getElementById('componenteCurricular').value,
+        serie: document.getElementById('serie').value,
+        competenciaEspecifica: document.getElementById('competenciaEspecifica').value,
+        habilidadeEspecifica: document.getElementById('habilidadeEspecifica').value,
+        objetivos: document.getElementById('objetivos').value,
+        objetosConhecimento: [...document.getElementById('objetoConhecimento').selectedOptions].map(option => option.value),
+        metodologia: document.getElementById('metodologia').value,
+        materialDeApoio: document.getElementById('materialDeApoio').value,
+        estrategiaDeAvaliacao: document.getElementById('estrategiaDeAvaliacao').value,
+    };
 
-        if (selectedSerie) {
-            const objetos = data[selectedArea].filter(item => item["Componente Curricular"] === selectedComponente && item["Série"] === selectedSerie)[0]["OBJETOS DO CONHECIMENTO"];
-            objetos.forEach(objeto => {
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.value = objeto;
-                checkbox.id = objeto;
+    // Armazena o plano de aula no localStorage
+    localStorage.setItem('planoDeAula', JSON.stringify(planoDeAula));
+    alert('Plano de aula salvo com sucesso!');
 
-                const label = document.createElement('label');
-                label.htmlFor = objeto;
-                label.textContent = objeto;
+    // Redireciona para a página de exportação do PDF
+    window.location.assign("export_pdf.html");
+}
 
-                const div = document.createElement('div');
-                div.appendChild(checkbox);
-                div.appendChild(label);
 
-                objetosContainer.appendChild(div);
-            });
-        }
-    });
-});
