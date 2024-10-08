@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geração de Planos de Aula</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Geração de Planos de Aula</h1>
+    </header>
+
+    <main>
+        <form id="planoForm">
+            <div class="form-group">
+                <label for="gre">GRE:</label>
+                <input type="text" id="gre" name="gre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="escola">Escola:</label>
+                <input type="text" id="escola" name="escola" required>
+            </div>
+
+            <div class="form-group">
+                <label for="professor">Professor:</label>
+                <input type="text" id="professor" name="professor" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dataInicio">Data de Início:</label>
+                <input type="date" id="dataInicio" name="dataInicio" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dataFim">Data de Fim:</label>
+                <input type="date" id="dataFim" name="dataFim" required>
+            </div>
+
+            <div class="form-group">
+                <label for="serie">Série:</label>
+                <select id="serie" name="serie"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="trimestre">Trimestre:</label>
+                <select id="trimestre" name="trimestre"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="componenteCurricular">Componente Curricular:</label>
+                <select id="componenteCurricular" name="componenteCurricular"></select>
+            </div>
+
+            <div class="form-group">
+                <label for="objetosConhecimento">Objetos de Conhecimento:</label>
+                <select id="objetosConhecimento" name="objetosConhecimento" multiple></select>
+            </div>
+
+            <div class="form-group">
+                <label for="metodologia">Metodologia:</label>
+                <textarea id="metodologia" name="metodologia"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="materialApoio">Materiais de Apoio:</label>
+                <textarea id="materialApoio" name="materialApoio"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="avaliacao">Avaliação:</label>
+                <textarea id="avaliacao" name="avaliacao"></textarea>
+            </div>
+
+            <button type="submit">Gerar Plano de Aula</button>
+        </form>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

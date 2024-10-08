@@ -1,0 +1,152 @@
+{
+  "series": [
+    {
+      "nome": "1ª Série do Ensino Médio",
+      "trimestres": [
+        {
+          "nome": "1º Trimestre",
+          "componentesCurriculares": [
+            {
+              "nome": "Álgebra",
+              "objetosConhecimento": [
+                {
+                  "nome": "Equações de 1º Grau",
+                  "competencia": "Resolver equações e inequações de 1º grau",
+                  "habilidade": "Interpretar e resolver problemas do cotidiano utilizando equações de 1º grau",
+                  "objetivo": "Desenvolver a habilidade de resolução de problemas algébricos"
+                },
+                {
+                  "nome": "Cálculo de área e perímetro",
+                  "competencia": "Aplicar fórmulas para calcular áreas e perímetros de figuras geométricas planas",
+                  "habilidade": "Resolver problemas geométricos envolvendo áreas e perímetros",
+                  "objetivo": "Dominar conceitos básicos de geometria plana"
+                }
+              ]
+            },
+            {
+              "nome": "Física",
+              "objetosConhecimento": [
+                {
+                  "nome": "Movimento uniformemente variado",
+                  "competencia": "Analisar e interpretar movimentos em linha reta com aceleração constante",
+                  "habilidade": "Aplicar fórmulas para calcular deslocamento, velocidade e aceleração",
+                  "objetivo": "Dominar os conceitos de cinemática e suas aplicações"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "nome": "2º Trimestre",
+          "componentesCurriculares": [
+            {
+              "nome": "Gramática",
+              "objetosConhecimento": [
+                {
+                  "nome": "Leitura e interpretação de texto",
+                  "competencia": "Compreender e interpretar diferentes gêneros textuais",
+                  "habilidade": "Desenvolver a capacidade de análise crítica de textos literários e não literários",
+                  "objetivo": "Aprimorar a compreensão e a produção textual"
+                }
+              ]
+            },
+            {
+              "nome": "Química",
+              "objetosConhecimento": [
+                {
+                  "nome": "Reações químicas",
+                  "competencia": "Entender os princípios das reações químicas e suas aplicações no cotidiano",
+                  "habilidade": "Identificar tipos de reações químicas e suas influências nos processos industriais",
+                  "objetivo": "Compreender a importância das reações químicas na natureza e na indústria"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "2ª Série do Ensino Médio",
+      "trimestres": [
+        {
+          "nome": "1º Trimestre",
+          "componentesCurriculares": [
+            {
+              "nome": "História",
+              "objetosConhecimento": [
+                {
+                  "nome": "Revolução Industrial",
+                  "competencia": "Entender o impacto da Revolução Industrial na sociedade",
+                  "habilidade": "Relacionar os avanços tecnológicos com mudanças sociais e econômicas",
+                  "objetivo": "Identificar as principais transformações econômicas e sociais trazidas pela Revolução Industrial"
+                }
+              ]
+            },
+            {
+              "nome": "Biologia",
+              "objetosConhecimento": [
+                {
+                  "nome": "Fotossíntese",
+                  "competencia": "Entender o processo de fotossíntese nas plantas",
+                  "habilidade": "Explicar o processo de fotossíntese e sua importância para a vida na Terra",
+                  "objetivo": "Compreender o ciclo de energia nas plantas e seu papel no ecossistema"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "nome": "2º Trimestre",
+          "componentesCurriculares": [
+            {
+              "nome": "Geometria",
+              "objetosConhecimento": [
+                {
+                  "nome": "Teorema de Pitágoras",
+                  "competencia": "Aplicar o Teorema de Pitágoras na resolução de problemas",
+                  "habilidade": "Resolver questões práticas e teóricas que envolvem o cálculo de áreas e distâncias",
+                  "objetivo": "Dominar o uso do Teorema de Pitágoras em situações do cotidiano"
+                }
+              ]
+            },
+            {
+              "nome": "Literatura",
+              "objetosConhecimento": [
+                {
+                  "nome": "Romantismo no Brasil",
+                  "competencia": "Compreender as características do Romantismo na literatura brasileira",
+                  "habilidade": "Analisar obras literárias do período romântico, identificando suas principais características",
+                  "objetivo": "Aprimorar o entendimento sobre o desenvolvimento literário no Brasil"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sugestoesMetodologia": [
+    "Aula expositiva e dialogada",
+    "Trabalho em grupo com discussão orientada",
+    "Atividades práticas em laboratório",
+    "Uso de tecnologias digitais e vídeos",
+    "Leitura e interpretação de textos",
+    "Estudo dirigido com questões reflexivas"
+  ],
+  "sugestoesMaterialApoio": [
+    "Livro didático da disciplina",
+    "Slides e apresentações multimídia",
+    "Laboratório de informática para simulações",
+    "Vídeos e documentários educativos",
+    "Artigos e textos de jornais e revistas",
+    "Materiais manipuláveis (como kits de geometria)"
+  ],
+  "sugestoesAvaliacao": [
+    "Prova escrita dissertativa",
+    "Prova objetiva com questões de múltipla escolha",
+    "Seminário ou apresentação oral em grupo",
+    "Trabalho escrito individual",
+    "Relatório de pesquisa",
+    "Avaliação contínua com observação e participação"
+  ]
+}
