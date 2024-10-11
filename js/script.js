@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
+
     function populateSelect(selectId, data, key, isMultiple = false) {
         const select = document.getElementById(selectId);
         select.innerHTML = ''; // Limpa o select
@@ -53,11 +54,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+
+
     function populateSuggestions(textareaId, suggestions) {
         const textarea = document.getElementById(textareaId);
         textarea.placeholder = 'Sugestões: ' + suggestions.join(', ');
     }
 
+    
     // Função para gerar o PDF
     document.getElementById('planoForm').addEventListener('submit', function (event) {
         event.preventDefault();
@@ -67,6 +71,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const professor = document.getElementById('professor').value;
         const dataInicio = document.getElementById('dataInicio').value;
         const dataFim = document.getElementById('dataFim').value;
+        function formatarData(data) {
+            const partes = data.split('-'); // Aqui a gente separa o ano, mês e dia
+            return `${partes[2]}/${partes[1]}/${partes[0]}`; // Aqui a gente junta de novo no formato certo
+        }
+        const dataInicioFormatada = formatarData(dataInicio);
+        const dataFimFormatada = formatarData(dataFim);
+
         const serie = document.getElementById('serie').value;
         const trimestre = document.getElementById('trimestre').value;
         const componenteCurricular = document.getElementById('componenteCurricular').value;
@@ -75,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const avaliacao = document.getElementById('avaliacao').value;
         const objetosConhecimentoSelect = document.getElementById('objetosConhecimento');
         const selectedObjetosConhecimento = Array.from(objetosConhecimentoSelect.selectedOptions);
-
+        
         // Buscar informações detalhadas do JSON
         const serieData = globalData.series.find(s => s.nome === serie);
         const trimestreData = serieData.trimestres.find(t => t.nome === trimestre);
@@ -88,8 +99,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const doc = new jsPDF();
 
         // Configurações ABNT
-        const fontSizeTitle = 12;
-        const fontSizeText = 10;
+        const fontSizeTitle = 14;
+        const fontSizeText = 12;
         const lineHeight = 7;
         const margin = 30;
         const pageWidth = doc.internal.pageSize.getWidth();
@@ -126,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
         doc.setFontSize(fontSizeText);
         yPosition = addWrappedText(`Professor(a): ${professor}`, margin, yPosition, maxLineWidth, lineHeight);
         yPosition = addWrappedText(`Componente curricular: ${componenteCurricular}   Série: ${serie}`, margin, yPosition, maxLineWidth, lineHeight);
-        yPosition = addWrappedText(`Trimestre: ${trimestre}   Vigência: de ${dataInicio} a ${dataFim}`, margin, yPosition, maxLineWidth, lineHeight);
+        yPosition = addWrappedText(`Trimestre: ${trimestre}   Vigência: de ${dataInicioFormatada} a ${dataFimFormatada}`, margin, yPosition, maxLineWidth, lineHeight);
 
         yPosition += lineHeight * 2;
 
@@ -164,15 +175,40 @@ document.addEventListener('DOMContentLoaded', function () {
             
             yPosition += lineHeight * 2;
         });
-
+        
         // Adicionar numeração de páginas
         const pageCount = doc.internal.getNumberOfPages();
         for (let i = 1; i <= pageCount; i++) {
             doc.setPage(i);
             doc.setFont('Times', 'normal');
-            doc.setFontSize(8);
+            doc.setFontSize(12);
             doc.text(`Página ${i} de ${pageCount}`, pageWidth - margin, pageHeight - margin, { align: 'right' });
         }
+        
+        if (yPosition + lineHeight * 6 > pageHeight - margin) {
+            yPosition = addNewPage(); // Isso aqui vai para uma nova página se não tiver espaço
+        }
+        
+        // Linha para o professor
+        doc.setFont('Times', 'bold');
+        doc.text("________________________________________", margin, yPosition); // Desenha a linha
+        yPosition += lineHeight; // Move para baixo
+        doc.text("Professor(a)", margin, yPosition); // Escreve "Professor"
+        
+        yPosition += lineHeight * 2;
+        
+        // Linha para o coordenador
+        doc.text("________________________________________", margin, yPosition);
+        yPosition += lineHeight;
+        doc.text("Coordenador(a)", margin, yPosition);
+        
+        yPosition += lineHeight * 2;
+        
+        // Linha para o diretor
+        doc.text("________________________________________", margin, yPosition);
+        yPosition += lineHeight;
+        doc.text("Diretor(a)", margin, yPosition);
+        
 
         // Gerar o PDF
         doc.save('plano_aula.pdf');
