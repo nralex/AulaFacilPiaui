@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-
+    // Função para popular selects
     function populateSelect(selectId, data, key, isMultiple = false) {
         const select = document.getElementById(selectId);
         select.innerHTML = ''; // Limpa o select
@@ -54,14 +54,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-
-
+    // Função para popular sugestões
     function populateSuggestions(textareaId, suggestions) {
         const textarea = document.getElementById(textareaId);
         textarea.placeholder = 'Sugestões: ' + suggestions.join(', ');
     }
 
-    
     // Função para gerar o PDF
     document.getElementById('planoForm').addEventListener('submit', function (event) {
         event.preventDefault();
@@ -71,9 +69,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const professor = document.getElementById('professor').value;
         const dataInicio = document.getElementById('dataInicio').value;
         const dataFim = document.getElementById('dataFim').value;
+
+        // Formatação da data
         function formatarData(data) {
-            const partes = data.split('-'); // Aqui a gente separa o ano, mês e dia
-            return `${partes[2]}/${partes[1]}/${partes[0]}`; // Aqui a gente junta de novo no formato certo
+            const partes = data.split('-'); // Separar o ano, mês e dia
+            return `${partes[2]}/${partes[1]}/${partes[0]}`; // Juntar de novo no formato correto
         }
         const dataInicioFormatada = formatarData(dataInicio);
         const dataFimFormatada = formatarData(dataFim);
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const avaliacao = document.getElementById('avaliacao').value;
         const objetosConhecimentoSelect = document.getElementById('objetosConhecimento');
         const selectedObjetosConhecimento = Array.from(objetosConhecimentoSelect.selectedOptions);
-        
+
         // Buscar informações detalhadas do JSON
         const serieData = globalData.series.find(s => s.nome === serie);
         const trimestreData = serieData.trimestres.find(t => t.nome === trimestre);
@@ -124,29 +124,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Cabeçalho
         doc.setFont('Times', 'bold');
-        doc.setFontSize(fontSizeTitle);
+        doc.setFontSize(fontSizeText);
         yPosition = addWrappedText("GOVERNO DO ESTADO DO PIAUÍ", margin, yPosition, maxLineWidth, lineHeight);
         yPosition = addWrappedText("SECRETARIA DA EDUCAÇÃO – SEDUC", margin, yPosition, maxLineWidth, lineHeight);
         yPosition = addWrappedText(`${gre}ª GERÊNCIA REGIONAL DE EDUCAÇÃO`, margin, yPosition, maxLineWidth, lineHeight);
         yPosition = addWrappedText(escola, margin, yPosition, maxLineWidth, lineHeight);
 
-        yPosition += lineHeight * 2;
-
         // Informações do professor
-        doc.setFont('Times', 'normal');
-        doc.setFontSize(fontSizeText);
         yPosition = addWrappedText(`Professor(a): ${professor}`, margin, yPosition, maxLineWidth, lineHeight);
         yPosition = addWrappedText(`Componente curricular: ${componenteCurricular}   Série: ${serie}`, margin, yPosition, maxLineWidth, lineHeight);
         yPosition = addWrappedText(`Trimestre: ${trimestre}   Vigência: de ${dataInicioFormatada} a ${dataFimFormatada}`, margin, yPosition, maxLineWidth, lineHeight);
 
-        yPosition += lineHeight * 2;
+        yPosition += lineHeight;
 
         // Título
-        doc.setFont('Times', 'bold');
         doc.setFontSize(fontSizeTitle);
-        yPosition = addWrappedText("Plano de Aula", margin, yPosition, maxLineWidth, lineHeight);
+        doc.text("Plano de Aula", pageWidth / 2, yPosition, { align: 'center' });
+        yPosition += lineHeight;
 
-        yPosition += lineHeight * 2;
+        // Eliminar duplicatas para Competência, Habilidade e Objetivo
+        const competenciasUnicas = [...new Set(objetosConhecimentoData.map(obj => obj.competencia))].join("\n");
+        const habilidadesUnicas = [...new Set(objetosConhecimentoData.map(obj => obj.habilidade))].join("\n");
+        const objetivosUnicos = [...new Set(objetosConhecimentoData.map(obj => obj.objetivo))].join("\n");
 
         // Seções de conteúdo
         doc.setFont('Times', 'normal');
@@ -154,61 +153,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const sections = [
             { title: "Objeto do Conhecimento:", content: objetosConhecimentoData.map(obj => obj.nome).join(", ") },
-            { title: "Competência Específica:", content: objetosConhecimentoData.map(obj => obj.competencia).join("\n") },
-            { title: "Habilidade:", content: objetosConhecimentoData.map(obj => obj.habilidade).join("\n") },
-            { title: "Objetivo de Aprendizagem:", content: objetosConhecimentoData.map(obj => obj.objetivo).join("\n") },
+            { title: "Competência Específica:", content: competenciasUnicas },
+            { title: "Habilidade:", content: habilidadesUnicas },
+            { title: "Objetivo de Aprendizagem:", content: objetivosUnicos },
             { title: "Metodologia:", content: metodologia },
             { title: "Material de Apoio:", content: materialApoio },
             { title: "Avaliação:", content: avaliacao }
         ];
 
         sections.forEach(section => {
-            if (yPosition + lineHeight * 4 > pageHeight - margin) {
+            if (yPosition + lineHeight * 2 > pageHeight - margin) {
                 yPosition = addNewPage();
             }
 
             doc.setFont('Times', 'bold');
             yPosition = addWrappedText(section.title, margin, yPosition, maxLineWidth, lineHeight);
-            
+
             doc.setFont('Times', 'normal');
             yPosition = addWrappedText(section.content, margin, yPosition + lineHeight, maxLineWidth, lineHeight);
-            
-            yPosition += lineHeight * 2;
+
+            yPosition += lineHeight;
         });
-        
-        // Adicionar numeração de páginas
+
+        // Adicionar numeração de páginas no rodapé, sem interferir nas assinaturas
         const pageCount = doc.internal.getNumberOfPages();
         for (let i = 1; i <= pageCount; i++) {
             doc.setPage(i);
             doc.setFont('Times', 'normal');
-            doc.setFontSize(12);
-            doc.text(`Página ${i} de ${pageCount}`, pageWidth - margin, pageHeight - margin, { align: 'right' });
+            doc.setFontSize(10);
+            doc.text(`Página ${i} de ${pageCount}`, pageWidth / 2, pageHeight - 10, { align: 'center' });
         }
-        
-        if (yPosition + lineHeight * 6 > pageHeight - margin) {
-            yPosition = addNewPage(); // Isso aqui vai para uma nova página se não tiver espaço
-        }
-        
-        // Linha para o professor
-        doc.setFont('Times', 'bold');
-        doc.text("________________________________________", margin, yPosition); // Desenha a linha
-        yPosition += lineHeight; // Move para baixo
-        doc.text("Professor(a)", margin, yPosition); // Escreve "Professor"
-        
-        yPosition += lineHeight * 2;
-        
-        // Linha para o coordenador
-        doc.text("________________________________________", margin, yPosition);
-        yPosition += lineHeight;
-        doc.text("Coordenador(a)", margin, yPosition);
-        
-        yPosition += lineHeight * 2;
-        
-        // Linha para o diretor
-        doc.text("________________________________________", margin, yPosition);
-        yPosition += lineHeight;
-        doc.text("Diretor(a)", margin, yPosition);
-        
 
         // Gerar o PDF
         doc.save('plano_aula.pdf');
