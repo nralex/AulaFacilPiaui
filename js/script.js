@@ -135,12 +135,12 @@ document.addEventListener('DOMContentLoaded', function () {
         yPosition = addWrappedText(`Componente curricular: ${componenteCurricular}   Série: ${serie}`, margin, yPosition, maxLineWidth, lineHeight);
         yPosition = addWrappedText(`Trimestre: ${trimestre}   Vigência: de ${dataInicioFormatada} a ${dataFimFormatada}`, margin, yPosition, maxLineWidth, lineHeight);
 
-        yPosition += lineHeight;
+        yPosition += lineHeight * 2;
 
         // Título
         doc.setFontSize(fontSizeTitle);
         doc.text("Plano de Aula", pageWidth / 2, yPosition, { align: 'center' });
-        yPosition += lineHeight;
+        yPosition += lineHeight * 2;
 
         // Eliminar duplicatas para Competência, Habilidade e Objetivo
         const competenciasUnicas = [...new Set(objetosConhecimentoData.map(obj => obj.competencia))].join("\n");
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
         doc.setFontSize(fontSizeText);
 
         const sections = [
-            { title: "Objeto do Conhecimento:", content: objetosConhecimentoData.map(obj => obj.nome).join(";\n ") },
+            { title: "Objeto do Conhecimento:", content: objetosConhecimentoData.map(obj => obj.nome).join(";\n") },
             { title: "Competência Específica:", content: competenciasUnicas },
             { title: "Habilidade:", content: habilidadesUnicas },
             { title: "Objetivo de Aprendizagem:", content: objetivosUnicos },
@@ -172,16 +172,18 @@ document.addEventListener('DOMContentLoaded', function () {
             doc.setFont('Times', 'normal');
             yPosition = addWrappedText(section.content, margin, yPosition + lineHeight, maxLineWidth, lineHeight);
 
-            yPosition += lineHeight;
+            yPosition += lineHeight * 2;
         });
 
         // Adicionar numeração de páginas no rodapé, sem interferir nas assinaturas
+        let pageNumber = 1;
         const pageCount = doc.internal.getNumberOfPages();
         for (let i = 1; i <= pageCount; i++) {
             doc.setPage(i);
             doc.setFont('Times', 'normal');
             doc.setFontSize(10);
-            doc.text(`Página ${i} de ${pageCount}`, pageWidth / 2, pageHeight - 10, { align: 'center' });
+            //doc.text(`${pageNumber++} de ${pageCount}`, pageWidth - margin, pageHeight - 10, { align: 'right' });
+            doc.text(`Página ${i} de ${pageCount}`, pageWidth - margin, pageHeight - 10, { align: 'left' });
         }
 
         // Gerar o PDF
