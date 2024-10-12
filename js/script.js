@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
         doc.setFontSize(fontSizeText);
 
         const sections = [
-            { title: "Objeto do Conhecimento:", content: objetosConhecimentoData.map(obj => obj.nome).join(", ") },
+            { title: "Objeto do Conhecimento:", content: objetosConhecimentoData.map(obj => obj.nome).join(";\n ") },
             { title: "Competência Específica:", content: competenciasUnicas },
             { title: "Habilidade:", content: habilidadesUnicas },
             { title: "Objetivo de Aprendizagem:", content: objetivosUnicos },
