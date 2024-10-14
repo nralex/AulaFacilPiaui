@@ -6,7 +6,7 @@ body {
 }
 
 header {
-    background-color: #4CAF50;
+    background-color: #2600ff;
     color: white;
     padding: 10px 0;
     text-align: center;
@@ -42,7 +42,7 @@ input[type="text"], input[type="date"], select, textarea {
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #2600ff;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -51,7 +51,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #321f9b;
 }
 
 @media (max-width: 600px) {
